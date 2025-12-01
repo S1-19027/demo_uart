@@ -71,7 +71,7 @@ void Refresh_Display(void)
             GPIOC->BRR = GPIO_Pin_10;
             break; // ??
         case 1:
-            GPIOC->BRR = GPIO_Pin_11;
+							GPIOC->BRR = GPIO_Pin_11;
             break;
         case 2:
             GPIOC->BRR = GPIO_Pin_12;

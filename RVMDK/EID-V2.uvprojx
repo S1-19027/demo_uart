@@ -429,6 +429,11 @@
               <FileType>1</FileType>
               <FilePath>.\LED.c</FilePath>
             </File>
+            <File>
+              <FileName>sys.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\sys.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1081,6 +1086,11 @@
               <FileName>LED.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\LED.c</FilePath>
+            </File>
+            <File>
+              <FileName>sys.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\sys.c</FilePath>
             </File>
           </Files>
         </Group>

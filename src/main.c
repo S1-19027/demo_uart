@@ -57,7 +57,15 @@ void BoardInit()
 	SystemInit();
 
 }
-extern int key_pressed;
+void SysTick_Init(void)
+{
+    SysTick->LOAD = 72000 - 1;  // 72MHz ? 1ms
+    SysTick->VAL = 0;
+    SysTick->CTRL = 0x07;       // ????
+}
+
+extern int key_flag;
+extern uint8_t column_trigger ; // ?????
 int FlashID;
 u8 SPIFlashStatus;
 u8 FlashBuf[256] ;
@@ -104,17 +112,55 @@ LED_Init();
 	//ProgramPage(0,FlashBuf) ;
 	//ReadPage(0,FlashBuf) ;
 
+int LastCode = -1;   // ?????????
+int Age = 0;         // ??????
+int stable_key = -1; // ???????
+int key=-1;
 while(1)
 {
-    if(key_pressed != -1)
+
+    if(key_flag)  // ???????
     {
-        Update_Number(key_pressed);
-        key_pressed = -1;
+        int CurrentCode= KEY_read_column(column_trigger);;  // ????
+
+        if(CurrentCode == LastCode)
+        {
+            if(Age < 10) Age++; // ????????
+        }
+        else
+        {
+            Age = 0;
+            LastCode = CurrentCode;
+        }
+
+        // ???? (10?????)
+        if(Age >= 5 && CurrentCode != -1)
+        {
+            key = CurrentCode;  // ???????
+            key_flag = 0;              // ???,???????
+            Age = 0;                    // ????
+					 LastCode = -1;  // ??????
+					column_trigger = 0xFF;     // ?????
+        }
     }
 
-			Refresh_Display();
+    if(key != -1)
+    {
+
+       if(key >= 0 )
+    {
+        
+        Update_Number(key);   // ????
+       key=-1;
+    }
+
+
+	}
+
+    Refresh_Display();
 		delay_ms2(5);
 }
+
 
   return 1;
 

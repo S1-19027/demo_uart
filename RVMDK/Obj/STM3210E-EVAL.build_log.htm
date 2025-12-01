@@ -22,18 +22,30 @@ Dialog DLL:      TCM.DLL V1.14.14.0
  
 <h2>Project:</h2>
 D:\DEMO-EXTI-systickµÈ\Project\RVMDK\EID-V2.uvprojx
-Project File Date:  11/30/2025
+Project File Date:  12/01/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 3 (build 300)', folder: 'D:\MDK\ARM\ARMCC\Bin'
 Build target 'STM3210E-EVAL'
-compiling stm32f10x_it.c...
-..\src\key.h(12): warning:  #1-D: last line of file ends without a newline
+compiling main.c...
+..\src\LED.h(9): warning:  #1295-D: Deprecated declaration Refresh_Display - give arg types
+  void Refresh_Display();
+..\src\LED.h(10): warning:  #1-D: last line of file ends without a newline
   #endif
-..\src\stm32f10x_it.c: 1 warning, 0 errors
+..\src\key.h(14): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\inc\EXTI.h(21): warning:  #1-D: last line of file ends without a newline
+  /******END OF FILE****/
+..\src\main.c(154): warning:  #223-D: function "delay_ms2" declared implicitly
+  		delay_ms2(5);
+..\src\main.c(158): warning:  #111-D: statement is unreachable
+    return 1;
+..\src\main.c(110): warning:  #177-D: variable "stable_key" was declared but never referenced
+  int stable_key = -1; // ???????
+..\src\main.c: 7 warnings, 0 errors
 linking...
-Program Size: Code=3380 RO-data=352 RW-data=92 ZI-data=916  
-".\Obj\STM3210E-EVAL.axf" - 0 Error(s), 1 Warning(s).
+Program Size: Code=3212 RO-data=368 RW-data=92 ZI-data=916  
+".\Obj\STM3210E-EVAL.axf" - 0 Error(s), 7 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   D:\DEMO-EXTI-systickµÈ\Project\RVMDK\RTE

@@ -200,87 +200,58 @@ void TIM3_IRQHandler(void)
 /**
   * @}
   */ 
-volatile int key_pressed = -1;
-int stable_key = -1;
+
+volatile uint8_t column_trigger = 0xFF; // ?????
+
+
+volatile int key_flag = 0	;
+
 void EXTI0_IRQHandler(void)
 {
     if(EXTI_GetITStatus(EXTI_Line0) == SET)
-    {
-   
-        key_pressed = KEY_read();  // ??????
+    { 
+                key_flag = 1;                // ???????
+    column_trigger = 0;  // ?1???
+
         EXTI_ClearITPendingBit(EXTI_Line0);
-
-    if(key_pressed >= 0 && stable_key == -1)
-    {
-        stable_key = key_pressed;     // ????
-    }
-
-    if(key_pressed < 0)
-    {
-        stable_key = -1;      // ?????????
-    }
-
+			
     }
 }
+
 void EXTI1_IRQHandler(void)
 {
     if(EXTI_GetITStatus(EXTI_Line1) == SET)
-    {
- 
-        key_pressed = KEY_read();  // ??????
+    { 
+        
+            key_flag = 1;                // ???????
+			column_trigger = 1;  // ?1???
+
         EXTI_ClearITPendingBit(EXTI_Line1);
-
-    if(key_pressed >= 0 && stable_key == -1)
-    {
-        stable_key = key_pressed;     // ????
-    }
-
-    if(key_pressed < 0)
-    {
-        stable_key = -1;      // ?????????
-    }
-
     }
 }
+
 void EXTI2_IRQHandler(void)
 {
     if(EXTI_GetITStatus(EXTI_Line2) == SET)
     {
-   
-        key_pressed = KEY_read();  // ??????
+               key_flag = 1;                // ???????
+			column_trigger = 2;  // ?1???
+
         EXTI_ClearITPendingBit(EXTI_Line2);
-
-    if(key_pressed >= 0 && stable_key == -1)
-    {
-        stable_key = key_pressed;     // ????
-    }
-
-    if(key_pressed < 0)
-    {
-        stable_key = -1;      // ?????????
-    }
-
     }
 }
 
 void EXTI3_IRQHandler(void)
 {
     if(EXTI_GetITStatus(EXTI_Line3) == SET)
-    {
-        key_pressed = KEY_read();  // ??????
+    { 
+     
+            key_flag = 1;                // ???????
+			column_trigger = 3;  // ?1???
         EXTI_ClearITPendingBit(EXTI_Line3);
-
-    if(key_pressed >= 0 && stable_key == -1)
-    {
-        stable_key = key_pressed;     // ????
-    }
-
-    if(key_pressed < 0)
-    {
-        stable_key = -1;      // ?????????
-    }
-
     }
 }
+
+
 
 /******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/

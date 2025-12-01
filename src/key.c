@@ -51,6 +51,31 @@ int KEY_read(void)
     uint8_t key_2 = 1;
     uint8_t key_3 = 1;
     uint8_t key_4 = 1;
+    // ????? (ROW_2=0, ROW_1,3,4=1)
+    GPIO_ResetBits(ROW_PORT, ROW_2);
+    GPIO_SetBits(ROW_PORT, ROW_1 | ROW_3 | ROW_4);
+    
+    key_1 = GPIO_ReadInputDataBit(COL_PORT, COL_1);
+    key_2 = GPIO_ReadInputDataBit(COL_PORT, COL_2);
+    key_3 = GPIO_ReadInputDataBit(COL_PORT, COL_3);
+    key_4 = GPIO_ReadInputDataBit(COL_PORT, COL_4);
+
+    if (key_1 == Bit_RESET)
+    {
+        key_value = 4;
+    }
+    if (key_2 == Bit_RESET)
+    {
+        key_value = 5;
+    }
+    if (key_3 == Bit_RESET)
+    {
+        key_value = 6;
+    }
+    if (key_4 == Bit_RESET)
+    {
+        key_value = 7;
+    }
 
     // ????? (ROW_1=0, ROW_2,3,4=1)
     GPIO_ResetBits(ROW_PORT, ROW_1);
@@ -78,31 +103,6 @@ int KEY_read(void)
         key_value = 3;
     }
 
-    // ????? (ROW_2=0, ROW_1,3,4=1)
-    GPIO_ResetBits(ROW_PORT, ROW_2);
-    GPIO_SetBits(ROW_PORT, ROW_1 | ROW_3 | ROW_4);
-    
-    key_1 = GPIO_ReadInputDataBit(COL_PORT, COL_1);
-    key_2 = GPIO_ReadInputDataBit(COL_PORT, COL_2);
-    key_3 = GPIO_ReadInputDataBit(COL_PORT, COL_3);
-    key_4 = GPIO_ReadInputDataBit(COL_PORT, COL_4);
-
-    if (key_1 == Bit_RESET)
-    {
-        key_value = 4;
-    }
-    if (key_2 == Bit_RESET)
-    {
-        key_value = 5;
-    }
-    if (key_3 == Bit_RESET)
-    {
-        key_value = 6;
-    }
-    if (key_4 == Bit_RESET)
-    {
-        key_value = 7;
-    }
 
     // ????? (ROW_3=0, ROW_1,2,4=1)
     GPIO_ResetBits(ROW_PORT, ROW_3);
@@ -231,4 +231,49 @@ void key_test()
     }
 }
 
+// key.c - ????
+int KEY_GetOneShot2(void) {
+    static int last_key = -1;
+    static uint32_t last_time = 0;
+    static uint8_t debounce_count = 0;
+    
+    int current_key = KEY_read();
+    
+    if(current_key == last_key) {
+        debounce_count++;
+        if(debounce_count >= 3) {  // ???3?(15ms)
+            int result = current_key;
+            last_key = -1;         // ??????
+            debounce_count = 0;
+            return result;
+        }
+    } else {
+        debounce_count = 0;
+        last_key = current_key;
+    }
+    
+    return -1;
+}
+int KEY_read_column(uint8_t col)
+{
+    int key_value = -1;
+    uint16_t ROWS[4] = {ROW_1, ROW_2, ROW_3, ROW_4};
+    uint16_t COLS[4] = {COL_1, COL_2, COL_3, COL_4};
 
+    for(int row = 0; row < 4; row++)
+    {
+        // ?????
+        GPIO_SetBits(ROW_PORT, ROW_1 | ROW_2 | ROW_3 | ROW_4);
+        // ?????
+        GPIO_ResetBits(ROW_PORT, ROWS[row]);
+
+        // ?????
+        if(GPIO_ReadInputDataBit(COL_PORT, COLS[col]) == Bit_RESET)
+        {
+            key_value = row * 4 + col;
+            break;
+        }
+    }
+
+    return key_value;
+}
