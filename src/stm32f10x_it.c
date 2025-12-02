@@ -210,7 +210,7 @@ void EXTI0_IRQHandler(void)
 {
     if(EXTI_GetITStatus(EXTI_Line0) == SET)
     { 
-                key_flag = 1;                // ???????
+      key_flag = 1;                // ???????
     column_trigger = 0;  // ?1???
 
         EXTI_ClearITPendingBit(EXTI_Line0);

@@ -5,6 +5,8 @@
 int TimeSecond = 0;
 int Time1msConunt = 0  ;
 
+volatile uint32_t ms_tick = 0;
+volatile uint8_t  scan_flag = 0;
 
 void time_handle()
 {
@@ -21,7 +23,15 @@ void SysTick_Handler(void)
 {
   /* Update the LocalTime by adding SYSTEMTICK_PERIOD_MS each SysTick interrupt */
 	time_handle();
- 
+     // ? 2ms ??????(??????????)
+    static uint8_t cnt = 0;
+    cnt++;
+    if (cnt >= 1)
+    {
+        cnt = 0;
+        scan_flag = 1;
+    }    // ? 2ms ??????(??????????)
+   
 }
 
 void systick_init(void)

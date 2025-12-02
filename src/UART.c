@@ -142,3 +142,4 @@ void uart1_init()
 	NVIC_Configuration();
 
 }
+

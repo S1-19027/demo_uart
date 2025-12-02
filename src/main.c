@@ -57,18 +57,19 @@ void BoardInit()
 	SystemInit();
 
 }
-void SysTick_Init(void)
-{
-    SysTick->LOAD = 72000 - 1;  // 72MHz ? 1ms
-    SysTick->VAL = 0;
-    SysTick->CTRL = 0x07;       // ????
-}
+// main.c ????:
+extern volatile int key_flag;
+extern volatile uint8_t column_trigger;
+extern volatile uint8_t scan_flag ;
 
-extern int key_flag;
-extern uint8_t column_trigger ; // ?????
 int FlashID;
 u8 SPIFlashStatus;
 u8 FlashBuf[256] ;
+
+int LastCode = -1;   // ?????????
+int Age = 0;         // ??????
+int stable_key = -1; // ???????
+int key=-1;
 int main(void)
 {
 	//int i ;
@@ -86,7 +87,7 @@ LED_Init();
 	
 	
 //------------定时器测试------------
-	//systick_init();	
+	systick_init();	
 	//tim6_init(1000,72-1);
 	//tim6_start();
 	//PwmOutputInit(); //	TIM1_CH1N作为PWM输出
@@ -101,73 +102,63 @@ LED_Init();
 
 //------------SPI flash测试------------	
 	//ENC25Q80_SPI2_Init();
-	//FlashID = SPI_FLASH_ReadDeviceID();	
+//	FlashID = SPI_FLASH_ReadDeviceID();	
 	
 	//SPI2_WriteDisable();
-	//SPIFlashStatus = SPI2_ReadStatus();
-	//SPI2_WriteEnable();
 //	SPIFlashStatus = SPI2_ReadStatus();
+	//SPI2_WriteEnable();
+	//SPIFlashStatus = SPI2_ReadStatus();
 	
 	//EraseSector(0);
-	//ProgramPage(0,FlashBuf) ;
+//	ProgramPage(0,FlashBuf) ;
 	//ReadPage(0,FlashBuf) ;
-
-int LastCode = -1;   // ?????????
-int Age = 0;         // ??????
-int stable_key = -1; // ???????
-int key=-1;
-while(1)
-{
-
-    if(key_flag)  // ???????
-    {
-        int CurrentCode= KEY_read_column(column_trigger);;  // ????
-
-        if(CurrentCode == LastCode)
-        {
-            if(Age < 10) Age++; // ????????
-        }
-        else
-        {
-            Age = 0;
-            LastCode = CurrentCode;
-        }
-
-        // ???? (10?????)
-        if(Age >= 5 && CurrentCode != -1)
-        {
-            key = CurrentCode;  // ???????
-            key_flag = 0;              // ???,???????
-            Age = 0;                    // ????
-					 LastCode = -1;  // ??????
-					column_trigger = 0xFF;     // ?????
-        }
-    }
-
-    if(key != -1)
-    {
-
-       if(key >= 0 )
-    {
+while(1) {
+    if(key_flag) {
+        int CurrentCode = KEY_read_column(column_trigger);
         
-        Update_Number(key);   // ????
-       key=-1;
+        // ? ????????
+        if(CurrentCode == -1) {
+            // ????,????
+            Age = 0;
+            LastCode = -1;
+            // ???key_flag,???????
+        } 
+        // ? ????
+        else if(CurrentCode != -1) {
+            if(CurrentCode == LastCode) {
+                if(Age < 5) Age++;
+            } else {
+                Age = 0;
+                LastCode = CurrentCode;
+            }
+            
+            // ????
+            if(Age >= 2) {
+                key = CurrentCode;
+                Age = 0;  // ? ??Age=10,??????
+                key_flag = 0;  // ????,????
+                column_trigger = 0xFF;  // ?????
+                // ? ????LastCode,????????
+            }
+        }
     }
-
-
-	}
-
-    Refresh_Display();
-		delay_ms2(5);
+    
+    // ????
+    if(key != -1) {
+        Update_Number(key);
+        key = -1;
+    }
+    
+    // ??
+    if(scan_flag) {
+			Refresh_Display();
+       scan_flag = 0;
+     
+    }
+		//Refresh_Display();
+		//delay_us2(10);
 }
-
-
-  return 1;
-
-	
-
 }
-
 
 
 /******************* (C) COPYRIGHT 2009 STMicroelectronics *****END OF FILE****/

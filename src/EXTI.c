@@ -182,7 +182,6 @@ void LED_Configuration(void)
 void Count_KEY_Init(void)
 {
 		GPIO_InitTypeDef GPIO_InitStruct;	
-	
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE);	
 	GPIO_InitStruct.GPIO_Mode=GPIO_Mode_IPU;//????? ??????(??????)
 	GPIO_InitStruct.GPIO_Pin=GPIO_Pin_6|GPIO_Pin_7;//???????????10
@@ -209,6 +208,7 @@ void EXITInit(void)
     //=========== ? PE0~PE3 ??(??)===========
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOE, &GPIO_InitStructure);
 
 
@@ -222,26 +222,26 @@ void EXITInit(void)
     GPIO_EXTILineConfig(GPIO_PortSourceGPIOE, GPIO_PinSource2);
     GPIO_EXTILineConfig(GPIO_PortSourceGPIOE, GPIO_PinSource3);
 
-    //== ?? EXTI ????? ==
-    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;   // ?? -> ???
-    EXTI_InitStructure.EXTI_LineCmd = ENABLE;
+EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling;
+EXTI_InitStructure.EXTI_LineCmd = ENABLE;
 
-    // EXTI0 ?? PE0
-    EXTI_InitStructure.EXTI_Line = EXTI_Line0;
-    EXTI_Init(&EXTI_InitStructure);
+// EXTI0
+EXTI_InitStructure.EXTI_Line = EXTI_Line0;
+EXTI_Init(&EXTI_InitStructure);
 
-    // EXTI1 ?? PE1
-    EXTI_InitStructure.EXTI_Line = EXTI_Line1;
-    EXTI_Init(&EXTI_InitStructure);
+// EXTI1
+EXTI_InitStructure.EXTI_Line = EXTI_Line1;
+EXTI_Init(&EXTI_InitStructure);
 
-    // EXTI2 ?? PE2
-    EXTI_InitStructure.EXTI_Line = EXTI_Line2;
-    EXTI_Init(&EXTI_InitStructure);
+// EXTI2
+EXTI_InitStructure.EXTI_Line = EXTI_Line2;
+EXTI_Init(&EXTI_InitStructure);
 
-    // EXTI3 ?? PE3
-    EXTI_InitStructure.EXTI_Line = EXTI_Line3;
-    EXTI_Init(&EXTI_InitStructure);
+// EXTI3
+EXTI_InitStructure.EXTI_Line = EXTI_Line3;
+EXTI_Init(&EXTI_InitStructure);
+
 
 
     //=================================================
@@ -271,8 +271,8 @@ void EXITInit(void)
 
     // EXTI3_IRQn
     NVIC_InitStructure.NVIC_IRQChannel = EXTI3_IRQn;
-		NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 3;
+		NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
 

@@ -6,5 +6,6 @@
 void LED_Init(void);
 void Update_Number(uint8_t num);
 void Display_Clear(void);
-void Refresh_Display();
+void Refresh_Display(void);
 #endif
+
