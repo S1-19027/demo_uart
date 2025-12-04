@@ -1,7 +1,7 @@
 //systick.c
 #include "stm32f10x.h"                  // Device header
 #include "stm32f10x_dma.h"
-
+#include "key.h"
 int TimeSecond = 0;
 int Time1msConunt = 0  ;
 
@@ -18,6 +18,8 @@ void time_handle()
 		}
 }
 
+volatile int key_flag = 0	;
+volatile int key_value2 = -1;
 volatile int time1ms ;
 void SysTick_Handler(void)
 {
@@ -31,6 +33,13 @@ void SysTick_Handler(void)
         cnt = 0;
         scan_flag = 1;
     }    // ? 2ms ??????(??????????)
+		
+		int key = KEY_GetOneShot();
+    if(key >= 0)
+    {
+        key_value2 = key;
+        key_flag = 1;  // ?????
+    }
    
 }
 

@@ -27,27 +27,20 @@ Project File Date:  12/01/2025
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 3 (build 300)', folder: 'D:\MDK\ARM\ARMCC\Bin'
 Build target 'STM3210E-EVAL'
-compiling LED.c...
-LED.h(9): warning:  #1295-D: Deprecated declaration Refresh_Display - give arg types
-  void Refresh_Display();
-LED.h(10): warning:  #1-D: last line of file ends without a newline
-  #endif
-LED.c(98): warning:  #223-D: function "delay_ms2" declared implicitly
-  			delay_ms2(5); // ????,??????
-LED.c(114): warning:  #1-D: last line of file ends without a newline
-  }
-LED.c: 4 warnings, 0 errors
-compiling stm32f10x_it.c...
+compiling main.c...
+..\src\main.c(90): warning:  #223-D: function "systick_init" declared implicitly
+  	systick_init();	
+..\src\main.c: 1 warning, 0 errors
 linking...
-Program Size: Code=3788 RO-data=352 RW-data=124 ZI-data=916  
-".\Obj\STM3210E-EVAL.axf" - 0 Error(s), 4 Warning(s).
+Program Size: Code=3372 RO-data=352 RW-data=168 ZI-data=912  
+".\Obj\STM3210E-EVAL.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
   D:\DEMO-EXTI-systickµÈ\Project\RVMDK\RTE
   D:\MDK\ARM\PACK\Keil\STM32F1xx_DFP\2.1.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

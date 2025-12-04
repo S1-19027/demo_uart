@@ -65,7 +65,7 @@ extern volatile uint8_t scan_flag ;
 int FlashID;
 u8 SPIFlashStatus;
 u8 FlashBuf[256] ;
-
+extern int key_value2 ;
 int LastCode = -1;   // ?????????
 static int Age = 0;         // ??????
 int stable_key = -1; // ???????
@@ -80,7 +80,7 @@ int main(void)
 //LED_Configuration();
 LED_Init();
   
-  //KEY_Configuration(); // ?????????
+  KEY_Configuration(); // ?????????
 
 //指示灯--------
 //	LED_Configuration();//指示灯配置，本例无用
@@ -97,7 +97,7 @@ LED_Init();
 //------------PB6按键------------	
 //	Count_KEY_Init();  	//配置引脚为输入
 	//EXTI_test(); 		//外部中断测试
-	 EXITInit();
+	// EXITInit();
 	//TIM4_Capture_Init();//输入脉宽测试
 
 //------------SPI flash测试------------	
@@ -114,7 +114,7 @@ LED_Init();
 	//ReadPage(0,FlashBuf) ;
 while(1) {
     if(key_flag) {
-        int CurrentCode =  KEY_read();
+        int CurrentCode =  key_value2;
         
         // ? ????????
         if(CurrentCode == -1) {
