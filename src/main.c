@@ -59,7 +59,7 @@ void BoardInit()
 }
 // main.c ????:
 extern volatile int key_flag;
-extern volatile uint8_t column_trigger;
+//extern volatile uint8_t column_trigger;
 extern volatile uint8_t scan_flag ;
 
 int FlashID;
@@ -114,7 +114,7 @@ LED_Init();
 	//ReadPage(0,FlashBuf) ;
 while(1) {
     if(key_flag) {
-        int CurrentCode = KEY_read_column(column_trigger);
+        int CurrentCode =  KEY_read();
         
         // ? ????????
         if(CurrentCode == -1) {
@@ -137,7 +137,7 @@ while(1) {
                 key = CurrentCode;
                 Age = 0;  // ? ??Age=10,??????
                 key_flag = 0;  // ????,????
-                column_trigger = 0xFF;  // ?????
+        //        column_trigger = 0xFF;  // ?????
                 // ? ????LastCode,????????
             }
         }

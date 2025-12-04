@@ -352,9 +352,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>211</LineNumber>
+          <LineNumber>240</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134219094</Address>
+          <Address>134219214</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -363,14 +363,14 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>D:\DEMO-EXTI-systick绛?Project\src\stm32f10x_it.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\STM3210E_EVAL\../src/stm32f10x_it.c\211</Expression>
+          <Expression>\\STM3210E_EVAL\../src/stm32f10x_it.c\240</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>223</LineNumber>
+          <LineNumber>229</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134219134</Address>
+          <Address>134219162</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -379,14 +379,14 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>D:\DEMO-EXTI-systick绛?Project\src\stm32f10x_it.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\STM3210E_EVAL\../src/stm32f10x_it.c\223</Expression>
+          <Expression>\\STM3210E_EVAL\../src/stm32f10x_it.c\229</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>235</LineNumber>
+          <LineNumber>215</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134219170</Address>
+          <Address>134219114</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -395,14 +395,14 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>D:\DEMO-EXTI-systick绛?Project\src\stm32f10x_it.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\STM3210E_EVAL\../src/stm32f10x_it.c\235</Expression>
+          <Expression>\\STM3210E_EVAL\../src/stm32f10x_it.c\215</Expression>
         </Bp>
         <Bp>
           <Number>3</Number>
           <Type>0</Type>
-          <LineNumber>246</LineNumber>
+          <LineNumber>252</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134219210</Address>
+          <Address>134219266</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -411,7 +411,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>D:\DEMO-EXTI-systick绛?Project\src\stm32f10x_it.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\STM3210E_EVAL\../src/stm32f10x_it.c\246</Expression>
+          <Expression>\\STM3210E_EVAL\../src/stm32f10x_it.c\252</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -544,7 +544,7 @@
       <DebugFlag>
         <trace>0</trace>
         <periodic>1</periodic>
-        <aLwin>1</aLwin>
+        <aLwin>0</aLwin>
         <aCover>0</aCover>
         <aSer1>0</aSer1>
         <aSer2>0</aSer2>
