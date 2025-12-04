@@ -40,6 +40,15 @@ void LED_Init(void)
 
     // ????:??????(???????)
     GPIOC->BSRR = GPIO_Pin_10 | GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13;
+
+	RCC->APB2ENR |= 1<<6;          //使能PORTE时钟	
+//	GPIOE_CRH &=0XFFFFFFF0;       //清除PE8引脚原来设置  
+//	GPIOE_CRH |=0x3;			        //设置CNF8[1:0]为0x00：通用推挽输出模式，MODE8[1:0]为0x11：输出模式
+	GPIOE->CRH &= 0xFFFF0000;   // ?? PE8~PE11 ????
+GPIOE->CRH |= 0x00003333;   // ?? PE8~PE11 ?????
+	//GPIOE_BSRR = 1<<8;           //第8bit置1，则设置对应的ODR8位为1，即PE8引脚输出高电平  
+	GPIOE->BSRR = (1 << 8) | (1 << 9) | (1 << 10) | (1 << 11);
+
 }
 
 // ?????,???????4???(0-15??0-F)

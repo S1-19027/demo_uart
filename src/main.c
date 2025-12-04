@@ -67,7 +67,7 @@ u8 SPIFlashStatus;
 u8 FlashBuf[256] ;
 
 int LastCode = -1;   // ?????????
-int Age = 0;         // ??????
+static int Age = 0;         // ??????
 int stable_key = -1; // ???????
 int key=-1;
 int main(void)
@@ -128,7 +128,7 @@ while(1) {
             if(CurrentCode == LastCode) {
                 if(Age < 5) Age++;
             } else {
-                Age = 0;
+                
                 LastCode = CurrentCode;
             }
             
@@ -150,7 +150,7 @@ while(1) {
     }
     
     // ??
-    if(scan_flag) {
+    if(scan_flag > 0) {
 			Refresh_Display();
        scan_flag = 0;
      

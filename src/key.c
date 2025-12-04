@@ -254,11 +254,12 @@ int KEY_GetOneShot2(void) {
     
     return -1;
 }
+static    uint16_t ROWS[4] = {ROW_1, ROW_2, ROW_3, ROW_4};
+static    uint16_t COLS[4] = {COL_1, COL_2, COL_3, COL_4};
 int KEY_read_column(uint8_t col)
 {
     int key_value = -1;
-    uint16_t ROWS[4] = {ROW_1, ROW_2, ROW_3, ROW_4};
-    uint16_t COLS[4] = {COL_1, COL_2, COL_3, COL_4};
+
 		if(col < 0 || col > 3) return -1; // ????
     for(int row = 0; row < 4; row++)
     {
@@ -266,6 +267,9 @@ int KEY_read_column(uint8_t col)
         GPIO_SetBits(ROW_PORT, ROW_1 | ROW_2 | ROW_3 | ROW_4);
         // ?????
         GPIO_ResetBits(ROW_PORT, ROWS[row]);
+			
+				for (int i = 0 ; i < 256 ; i++) 
+				;
 
         // ?????
         if(GPIO_ReadInputDataBit(COL_PORT, COLS[col]) == Bit_RESET)
