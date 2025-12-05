@@ -168,7 +168,7 @@ int Key_Scan_10ms(void)
 
     if(CurrentCode == LastCode)
     {
-        if(Age < 20) Age++;   // ?????
+        if(Age <5) Age++;   // ?????
     }
     else
     {
@@ -177,7 +177,7 @@ int Key_Scan_10ms(void)
     }
 
     // ???? 10 ?(100ms)????? ? ?????
-    if(Age == 10)
+    if(Age == 2)
     {
         return LastCode;
     }

@@ -18,7 +18,7 @@ void time_handle()
 		}
 }
 
-volatile int key_flag = 0	;
+
 volatile int key_value2 = -1;
 volatile int time1ms ;
 void SysTick_Handler(void)
@@ -34,12 +34,12 @@ void SysTick_Handler(void)
         scan_flag = 1;
     }    // ? 2ms ??????(??????????)
 		
-		int key = KEY_GetOneShot();
-    if(key >= 0)
-    {
-        key_value2 = key;
-        key_flag = 1;  // ?????
-    }
+//		int key = KEY_GetOneShot();
+//    if(key >= 0)
+ //   {
+  //      key_value2 = key;
+   //     key_flag = 1;  // ?????
+ //   }
    
 }
 
