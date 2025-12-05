@@ -202,14 +202,14 @@ void TIM3_IRQHandler(void)
   */ 
 
 //volatile uint8_t column_trigger = 0xFF; // ?????
-
-
+volatile int key_flag = 0	;
+volatile int key_3 = -1;
 void EXTI0_IRQHandler(void)
 {
     if(EXTI_GetITStatus(EXTI_Line0) == SET)
     { 
-   //   key_flag = 1;                // ???????
-
+    key_flag = 1;                // ???????
+key_3=KEY_read();
 			 GPIOE->ODR ^= GPIO_Pin_8;   // ? ?? PE8
 
     //column_trigger = 0;  // ?1???
@@ -224,9 +224,9 @@ void EXTI0_IRQHandler(void)
 void EXTI1_IRQHandler(void)
 {
     if(EXTI_GetITStatus(EXTI_Line1) == SET)
-    { 
+    { key_3=KEY_read();
         
-          //  key_flag = 1;                // ???????
+            key_flag = 1;                // ???????
 
 
 			//column_trigger = 1;  // ?1???
@@ -242,10 +242,10 @@ void EXTI2_IRQHandler(void)
 {
     if(EXTI_GetITStatus(EXTI_Line2) == SET)
     {
-         //      key_flag = 1;                // ???????
-
+               key_flag = 1;                // ???????
+			
 			 GPIOE->ODR ^= GPIO_Pin_10;   // ? ?? PE8
-
+key_3=KEY_read();
 	//column_trigger = 2;  // ?1???
 
 
@@ -257,8 +257,8 @@ void EXTI3_IRQHandler(void)
 {
     if(EXTI_GetITStatus(EXTI_Line3) == SET)
     { 
-     
-         //   key_flag = 1;                // ???????
+     key_3=KEY_read();
+            key_flag = 1;                // ???????
 
 			 GPIOE->ODR ^= GPIO_Pin_11;   // ? ?? PE8
 
